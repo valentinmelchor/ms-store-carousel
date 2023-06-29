@@ -1,4 +1,4 @@
-var carrousel = {
+var carousel = {
     articles: [
         {
             title: "Forza Motorsport: Standard Edition",

@@ -4,7 +4,9 @@
     --borderRadius: 10px;
     --highlightPosition: ellipse at top right;
     --highlightColor: rgba(255, 255, 255, 25%);
+    --shadowColor: rgba(0, 0, 0, 50%);
     --glassHighlightGradient: radial-gradient(var(--highlightPosition), var(--highlightColor), transparent);
+    --pulseGradient: none;
 }
 
 * {
@@ -41,6 +43,7 @@ header {
     writing-mode: vertical-lr;
     text-orientation: upright;
     text-align: center;
+    z-index: 8;
 }
 
 #sidebar::before {
@@ -65,26 +68,31 @@ header {
     background-color: hsl(0deg, 0%, 16%);
 }
 
-.carrousel {
-    width: calc((858px + 1rem) * 8);
+.carousel {
+    overflow: hidden;
+    position: absolute;
+    left: 6rem;
     display: flex;
     flex-direction: row;
-    margin-top: 1rem;
-    gap: 1rem;
+    margin-top: 0.75rem;
+    gap: 0.75rem;
+    scroll-snap-type: x mandatory;
+    transition: left var(--transitionDuration);
 }
 
-.carrousel::after {
+.carousel::after {
     content: 'Home';
-    position: absolute;
+    position: fixed;
     color: white;
     font-weight: 600;
     font-size: 1.6rem;
-    left: 2.2rem;
-    top: 1.4rem;
-    text-shadow: 0 0 0.2em rgba(0, 0, 0, 50%);
+    left: calc(var(--sidebarWidth) + 6rem + 1rem + 2.2rem);
+    top: calc(3.2rem + 0.75rem + 1.2rem);
+    text-shadow: 0 0 0.2em var(--shadowColor);
 }
 
-.carrousel>article {
+.carousel>article {
+    scroll-snap-align: start;
     position: relative;
     height: 480px;
     width: 320px;
@@ -102,6 +110,7 @@ header {
     color: white;
     font-weight: 600;
     z-index: 1;
+    text-shadow: 0 0 0.2em var(--shadowColor);
     transition: bottom var(--transitionDuration), font-size var(--transitionDuration);
 }
 
@@ -111,7 +120,8 @@ header {
     position: absolute;
     left: 2.2rem;
     top: 15.4rem;
-    text-shadow: 1px 1px 0em rgba(0, 0, 0, 50%);
+    text-shadow: 1px 1px 0em var(--shadowColor),
+        0 0 0.2em var(--shadowColor);
     font-weight: 600;
 }
 
@@ -120,7 +130,7 @@ header {
     text-wrap: balance;
 }
 
-.carrousel>article>button::before {
+.carousel>article>button::before {
     content: '>';
     position: absolute;
     line-height: 0.75rem;
@@ -129,7 +139,7 @@ header {
     margin-left: -1.5ch;
 }
 
-.carrousel>article>button {
+.carousel>article>button {
     color: white;
     background-color: rgba(0, 0, 0, 25%);
     border: none;
@@ -142,14 +152,15 @@ header {
     width: 8rem;
     height: 2rem;
     z-index: 2;
-    transition: background 0.3s;
+    transition: background 0.3s, text-shadow 0.3s;
 }
 
-.carrousel>article>button:hover {
+.carousel>article>button:hover {
     background-color: rgba(255, 255, 255, 25%);
+    text-shadow: 1px 1px 0em var(--shadowColor), 0 0 0.2em var(--shadowColor);
 }
 
-.carrousel>article::after {
+.carousel>article::after {
     background: rgba(64, 64, 64, 50%);
     border-radius: var(--borderRadius);
     position: absolute;
@@ -171,57 +182,11 @@ header {
 }
 
 .glass::before {
+    background: var(--pulseGradient);
     border-radius: 8px;
     position: absolute;
     content: '';
     width: 100%;
     height: 100%;
     mix-blend-mode: soft-light !important;
-    animation: touchAnimation 0.3s;
-}
-
-@keyframes touchAnimation {
-    0% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 100%) 0%, transparent);
-    }
-
-    10% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 90%) 10%, transparent);
-    }
-
-    20% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 80%) 20%, transparent);
-    }
-
-    30% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 70%) 30%, transparent);
-    }
-
-    40% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 60%) 40%, transparent);
-    }
-
-    50% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 50%) 50%, transparent);
-    }
-
-    60% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 40%) 60%, transparent);
-    }
-
-    70% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 30%) 70%, transparent);
-    }
-
-    80% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 20%) 80%, transparent);
-    }
-
-    90% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 10%) 90%, transparent);
-    }
-
-    100% {
-        background: radial-gradient(var(--highlightPosition), transparent, rgba(255, 255, 255, 0%) 100%, transparent);
-    }
 }
