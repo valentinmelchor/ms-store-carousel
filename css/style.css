@@ -1,0 +1,171 @@
+:root {
+    --sidebarWidth: 4rem;
+    --transitionDuration: 0.5s;
+    --borderRadius: 10px;
+    --highlightPosition: ellipse at top right;
+    --highlightColor: rgba(255, 255, 255, 25%);
+    --glassHighlightGradient: radial-gradient(var(--highlightPosition), var(--highlightColor), transparent);
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+body {
+    background-color: hsl(0deg, 0%, 16%);
+    overflow-x: hidden;
+}
+
+main {
+    position: relative;
+    margin-left: calc(var(--sidebarWidth) + 1rem);
+}
+
+header {
+    height: 3.2rem;
+    background-color: hsl(0deg, 0%, 8%);
+    color: white;
+    text-align: center;
+}
+
+#sidebar {
+    background-color: hsl(0deg, 0%, 8%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--sidebarWidth);
+    height: 100%;
+    color: white;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    text-align: center;
+}
+
+#sidebar::before {
+    content: '';
+    position: absolute;
+    right: calc(var(--borderRadius) * -1);
+    top: 3.2rem;
+    width: var(--borderRadius);
+    height: var(--borderRadius);
+    border-radius: 0 0 0 0;
+    background-color: hsl(0deg, 0%, 8%);
+}
+
+#sidebar::after {
+    content: '';
+    position: absolute;
+    right: calc(var(--borderRadius) * -1);
+    top: 3.2rem;
+    width: var(--borderRadius);
+    height: var(--borderRadius);
+    border-radius: var(--borderRadius) 0 0 0;
+    background-color: hsl(0deg, 0%, 16%);
+}
+
+.carrousel {
+    width: calc((858px + 1rem) * 8);
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.carrousel::after {
+    content: 'Home';
+    position: absolute;
+    color: white;
+    font-weight: 600;
+    font-size: 1.6rem;
+    left: 2.2rem;
+    top: 1.4rem;
+    text-shadow: 0 0 0.2em rgba(0, 0, 0, 50%);
+}
+
+.carrousel>article {
+    position: relative;
+    height: 480px;
+    width: 320px;
+    background-position: center !important;
+    border-radius: var(--borderRadius);
+    transition: width var(--transitionDuration);
+}
+
+.title {
+    position: absolute;
+    max-width: 20ch;
+    left: 2.2rem;
+    bottom: 12rem;
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 600;
+    z-index: 1;
+    transition: bottom var(--transitionDuration), font-size var(--transitionDuration);
+}
+
+.description {
+    max-width: 40ch;
+    color: hsl(0, 0%, 75%);
+    position: absolute;
+    left: 2.2rem;
+    top: 15.4rem;
+    text-shadow: 1px 1px 0em rgba(0, 0, 0, 50%);
+    font-weight: 600;
+}
+
+.title,
+.description {
+    text-wrap: balance;
+}
+
+.carrousel>article>button::before {
+    content: '>';
+    position: absolute;
+    line-height: 0.75rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-left: -1.5ch;
+}
+
+.carrousel>article>button {
+    color: white;
+    background-color: rgba(0, 0, 0, 25%);
+    border: none;
+    outline: 1px solid rgba(255, 255, 255, 25%);
+    border-radius: 10px;
+    position: absolute;
+    left: 2.2rem;
+    top: 20rem;
+    font-weight: 600;
+    width: 8rem;
+    height: 2rem;
+    z-index: 2;
+    transition: background 0.3s;
+}
+
+.carrousel>article>button:hover {
+    background-color: rgba(255, 255, 255, 25%);
+}
+
+.carrousel>article::after {
+    background: rgba(64, 64, 64, 50%);
+    border-radius: var(--borderRadius);
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    transition: background 1s;
+    mix-blend-mode: normal;
+}
+
+.glass::after {
+    background: var(--glassHighlightGradient) !important;
+    border-radius: 8px;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: soft-light !important;
+}
