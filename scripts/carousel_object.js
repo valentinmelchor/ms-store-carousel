@@ -43,7 +43,7 @@ var carousel = {
             price: 5499.00
         },
         {
-            title: "Aplicaciones aclamadas para desarrolladores",
+            title: "Acclaimed Apps for Developers",
             description: "Streamline the work process and improve your productivity",
             image: 'dev.jpg',
             preorder: 0,
